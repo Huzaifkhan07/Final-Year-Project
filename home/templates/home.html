@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+
+
+{% block body %}
+
+    <div class="middle-container d-flex justify-content-end align-items-center mt-5 mb-5 gap-5">
+        <div class="main-form d-flex col justify-content-center">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit"class="btn btn-success mt-2">Get Analysis & Ai Recommendation</button>
+            </form>
+        
+        </div>
+
+        
+
+        <div class="vector1 w-50 h-auto ">
+            <img src="{% static './images/illu2.jpeg' %}" class="w-100 h-100 ">
+        </div>
+    </div>
+
+
+    
+    <div class="sec-container d-flex justify-content-around align-items-center mt-5 mb-5 gap-5">
+        <div class="vector2  h-auto border shadow p-3 mb-5 bg-white rounded" >
+            <img src="{% static './images/illu4.jpeg' %}" class="w-100 h-100 ">
+        </div>
+        <div class="vector3 position-absolute  h-auto border shadow p-3 mb-5 bg-white rounded" style="width:15rem; transform: rotate(-18deg); margin-top: -15rem; left: 24rem; ">
+            <img src="{% static './images/illu3.png' %}" class="w-100 h-100 ">
+        </div>
+
+        <div class="sec-detail w-50 ">
+            <p class="fs-5 fst-normal w-75 text-secondary mx-auto my-auto">Every day, millions buy packaged foods, often unaware of the impact hidden behind complex ingredient labels. For the average shopper, terms like emulsifiers, preservatives, and color additives can be a mystery. But for those with dietary needs or health concerns, understanding these ingredients is crucial. Our tool makes label decoding easy, helping you make informed, healthier choices in seconds.</p>
+        </div>
+    </div>
+    <div class="quote p-3 text-center h3 rounded-pill mb-4 w-50 bg-secondary text-white">Make Smarter, Healthier Food Choices Today!!</div>
+
+    
+
+
+
+
+
+
+
+    
+    
+    <!-- Clear All Button -->
+    <form action="{% url 'clear_data' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger m-2">Clear All</button>
+    </form>
+    
+
+    {% if uploaded_image %}
+        <p class="fs-5 mt-5">Image Uploaded</p>
+        <img src="{{ uploaded_image.image.url }}?{{ uploaded_image.uploaded_at.timestamp }}" alt="Uploaded Image" class="w-50 h-auto mt-1 mb-5">
+
+        <!-- <img src="{{ uploaded_image.image.url }}" alt="Uploaded Image" style="max-width: 500px; height: auto;"> -->
+    {% endif %}
+
+
+    {% if analysis_result %}
+        <h2>Analysis Result</h2>
+        <p>{{ analysis_result }}</p>
+    {% endif %}
+
+    {% if pie_chart_image %}
+    <img src="data:image/png;base64,{{ pie_chart_image }}" alt="Nutritional Breakdown"  class="m-8 mt-12  border rounded ">
+    {% endif %}
+
+    
+
+    {% if response2 %}
+    <div class="w-75 border px-4 rounded  bg-light  m-3">
+        <h1 class="mt-4 mb-8 border-bottom"> Ai Recommendation </h2>
+            <p>{{ response2|safe }}</p>  <!-- Use safe filter to render HTML content directly -->
+    </div>
+    {% endif %}
+    
+
+{% endblock body %}

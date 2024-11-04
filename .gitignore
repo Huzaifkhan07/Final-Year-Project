@@ -1,0 +1,25 @@
+# .gitignore
+
+# Ignore Django migrations
+home/migrations/
+
+# Ignore the SQLite database file
+db.sqlite3
+
+# Ignore environment variables
+.env
+
+# Ignore media files
+media/
+
+# Python bytecode and compiled files
+__pycache__/
+*.py[cod]
+
+# Other common ignores
+*.log
+*.DS_Store
+*.pyc
+*.pyo
+*.idea/
+*.vscode/
